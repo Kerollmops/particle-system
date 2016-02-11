@@ -37,7 +37,7 @@ int			init_gl_context(void)
 }
 
 Window::Window(const char *title, int width, int height, int resizable)
-	: _title(strdup(title)), _resizable(resizable), _width(width), _height(height) {
+	: _title(strdup(title)), _width(width), _height(height), _resizable(resizable) {
 
 	if (init_gl_context() != 0) {
 		throw std::exception();

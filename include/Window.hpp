@@ -29,10 +29,9 @@ public:
 
 private:
 	char		*_title;
-	int			_resizable;
-
 	int			_width;
 	int			_height;
+	int			_resizable;
 
 	int			_frame_width;
 	int			_frame_height;
