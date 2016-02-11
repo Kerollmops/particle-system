@@ -6,7 +6,7 @@
 #    By: crenault <crenault@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/05/09 18:00:27 by crenault          #+#    #+#              #
-#    Updated: 2016/02/11 11:44:52 by crenault         ###   ########.fr        #
+#    Updated: 2016/02/11 13:28:23 by crenault         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,6 +36,7 @@ NAME = particle-system
 
 # flags
 FLAGS = -Wall -Wextra
+FLAGS += -std=c++11
 # FLAGS += -Werror
 FLAGS += -pedantic-errors
 # FLAGS += -O3 -march=native
@@ -56,7 +57,7 @@ CFLAGS = $(FLAGS) $(INCLUDE)
 
 # to compile files
 SRC = main.cpp
-# SRC +=
+SRC += Window.cpp
 
 # paths of source files
 SRCDIR = src
