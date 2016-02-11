@@ -43,6 +43,7 @@ FLAGS += -pedantic-errors
 FLAGS += -g
 # FLAGS += -Wpadded
 # FLAGS += -fprofile-arcs -ftest-coverage
+FLAGS += -Wno-deprecated
 
 # include variables
 INCLUDERAW = include $(GLFWFOLDER)/include/GLFW
