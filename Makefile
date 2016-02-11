@@ -6,7 +6,7 @@
 #    By: crenault <crenault@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/05/09 18:00:27 by crenault          #+#    #+#              #
-#    Updated: 2016/02/11 11:40:08 by crenault         ###   ########.fr        #
+#    Updated: 2016/02/11 11:44:52 by crenault         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,9 +23,9 @@ SUBMODCHECK = $(GLFWCHECK)
 SUBMODEXIST = $(GLFWFOLDERLIB)
 
 # libraries
-LDFLAGSRAW = $(GLFWFOLDERLIB)/lib $(RDLFOLDER) $(CMHFOLDER) $(CMHFOLDER)/libft
+LDFLAGSRAW = $(GLFWFOLDERLIB)/lib
 LDFLAGS = $(addprefix -L, $(LDFLAGSRAW))
-LDLIBSRAW = $(GLFWNAME) $(RDLNAME) termcap $(CMHNAME) ft
+LDLIBSRAW = $(GLFWNAME)
 LDLIBS = $(addprefix -l, $(LDLIBSRAW))
 
 # compiler
@@ -135,15 +135,4 @@ $(GLFWFOLDERLIB):
 	-DCMAKE_INSTALL_PREFIX=../$(GLFWFOLDERLIB) -DGLFW_BUILD_EXAMPLES=OFF \
 	-DGLFW_BUILD_TESTS=OFF -DGLFW_BUILD_DOCS=OFF .
 	@make install -C $(GLFWFOLDER)
-	@echo $@ "updated!"
-
-# readline compilation
-$(RDLLIBPATH):
-	@cd $(RDLFOLDER) && ./configure
-	@$(MAKE) -C $(RDLFOLDER)
-	@echo $@ "updated!"
-
-# cMatrixHelper compilation
-$(CMHLIBPATH):
-	@$(MAKE) -C $(CMHFOLDER)
 	@echo $@ "updated!"

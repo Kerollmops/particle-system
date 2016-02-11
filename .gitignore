@@ -1,6 +1,7 @@
 # Custom
 particle-system.sublime-workspace
 dep/
+glfwlib/
 particle-system
 
 # Compiled Object files
