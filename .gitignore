@@ -1,3 +1,8 @@
+# Custom
+particle-system.sublime-workspace
+dep/
+particle-system
+
 # Compiled Object files
 *.slo
 *.lo
