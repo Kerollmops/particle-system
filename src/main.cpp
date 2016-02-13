@@ -6,13 +6,14 @@
 /*   By: crenault <crenault@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/11 11:41:05 by crenault          #+#    #+#             */
-/*   Updated: 2016/02/13 16:29:32 by crenault         ###   ########.fr       */
+/*   Updated: 2016/02/13 16:38:18 by crenault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Window.hpp"
 
 // test eigen
+#include <stdio.h>
 #include <iostream>
 #include "Eigen/Dense"
 // //////////
@@ -37,7 +38,7 @@ int		main(int argc, char const **argv)
 	m(0,1) = -1;
 	m(1,1) = m(1,0) + m(0,1);
 	std::cout << m << std::endl;
-	// printf("%s\n", (static_cast<std::string>(m).c_str());
+	// printf("%s\n", static_cast<std::ostream&>(std::cout, m));
 
 	// //////////
 
