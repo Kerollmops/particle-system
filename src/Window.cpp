@@ -6,7 +6,7 @@
 /*   By: crenault <crenault@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/11 13:05:03 by crenault          #+#    #+#             */
-/*   Updated: 2016/02/11 15:57:53 by crenault         ###   ########.fr       */
+/*   Updated: 2016/02/13 13:26:04 by crenault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,12 @@
 #include <stdlib.h>
 #include <exception>
 
-void		glfw_error_callback(int error, const char *description)
+static void		glfw_error_callback(int error, const char *description)
 {
 	dprintf(2, "GLFW Error: code %i msg: %s\n", error, description);
 }
 
-void			init_gl_context(void)
+static void		init_gl_context(void)
 {
 	glfwSetErrorCallback(glfw_error_callback);
 	if (glfwInit() == 0)
@@ -37,11 +37,11 @@ void			init_gl_context(void)
 }
 
 Window::Window(const char *title, int width, int height, int resizable)
-	: _title(strdup(title)), _resizable(resizable), _width(width), _height(height) {
+	: _title(title), _width(width), _height(height), _resizable(resizable) {
 
 	init_gl_context();
 	glfwWindowHint(GLFW_RESIZABLE, resizable);
-	this->_window_ptr = glfwCreateWindow(this->_width, this->_height, this->_title, NULL, NULL);
+	this->_window_ptr = glfwCreateWindow(this->_width, this->_height, this->_title.c_str(), NULL, NULL);
 	glfwGetWindowSize(this->_window_ptr, &this->_width, &this->_height);
 	if (this->_window_ptr == NULL)
 	{
@@ -60,7 +60,6 @@ Window::Window(Window const &src) {
 
 Window::~Window(void) {
 
-	free(this->_title);
 	glfwMakeContextCurrent(NULL);
 	glfwDestroyWindow(this->_window_ptr);
 }
@@ -71,7 +70,7 @@ Window::~Window(void) {
 	return *this;
 }*/
 
-GLFWwindow			*Window::getWindowPtr(void)
+GLFWwindow			*Window::getPtr(void)
 {
 	return (this->_window_ptr);
 }

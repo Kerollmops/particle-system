@@ -6,7 +6,7 @@
 #    By: crenault <crenault@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/05/09 18:00:27 by crenault          #+#    #+#              #
-#    Updated: 2016/02/11 13:28:23 by crenault         ###   ########.fr        #
+#    Updated: 2016/02/13 13:42:28 by crenault         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,8 +18,13 @@ GLFWLIB = lib$(GLFWNAME).a
 GLFWLIBPATH = $(GLFWFOLDER)/$(GLFWLIB)
 GLFWCHECK = $(GLFWFOLDER)/.git
 
+# eigen variables
+# http://bitbucket.org/eigen/eigen/get/3.2.7.tar.gz
+EIGENFOLDER = eigen
+EIGENCHECK = $(EIGENFOLDER)
+
 # submodules
-SUBMODCHECK = $(GLFWCHECK)
+SUBMODCHECK = $(GLFWCHECK) $(EIGENCHECK)
 SUBMODEXIST = $(GLFWFOLDERLIB)
 
 # libraries
@@ -137,3 +142,6 @@ $(GLFWFOLDERLIB):
 	-DGLFW_BUILD_TESTS=OFF -DGLFW_BUILD_DOCS=OFF .
 	@make install -C $(GLFWFOLDER)
 	@echo $@ "updated!"
+
+$(EIGENCHECK):
+	#
