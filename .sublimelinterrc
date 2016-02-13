@@ -4,7 +4,8 @@
       "extra_flags": "-Wall -Wextra -std=c++11",
       "include_dirs": [
         "${project_folder}/include",
-        "${project_folder}/glfw/include/GLFW"
+        "${project_folder}/glfw/include/GLFW",
+        "${project_folder}/eigen"
       ]
     }
   },

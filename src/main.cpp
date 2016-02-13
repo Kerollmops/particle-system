@@ -6,11 +6,16 @@
 /*   By: crenault <crenault@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/11 11:41:05 by crenault          #+#    #+#             */
-/*   Updated: 2016/02/13 16:01:38 by crenault         ###   ########.fr       */
+/*   Updated: 2016/02/13 16:29:32 by crenault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Window.hpp"
+
+// test eigen
+#include <iostream>
+#include "Eigen/Dense"
+// //////////
 
 int		main(int argc, char const **argv)
 {
@@ -22,6 +27,19 @@ int		main(int argc, char const **argv)
 	glClearColor(0.175f, 0.175f, 0.175f, 1.0f);
 	glEnable(GL_DEPTH_TEST);
 	glDepthFunc(GL_LESS);
+
+	// test eigen
+
+	Eigen::MatrixXd m(2,2);
+
+	m(0,0) = 3;
+	m(1,0) = 2.5;
+	m(0,1) = -1;
+	m(1,1) = m(1,0) + m(0,1);
+	std::cout << m << std::endl;
+	// printf("%s\n", (static_cast<std::string>(m).c_str());
+
+	// //////////
 
 	while (glfwWindowShouldClose(window.getPtr()) == GL_FALSE)
 	{

@@ -6,7 +6,7 @@
 #    By: crenault <crenault@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/02/13 15:36:50 by crenault          #+#    #+#              #
-#    Updated: 2016/02/13 16:05:36 by crenault         ###   ########.fr        #
+#    Updated: 2016/02/13 16:25:36 by crenault         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,12 +20,11 @@ GLFWCHECK = $(GLFWFOLDER)/.git
 
 # eigen variables
 EIGENFOLDER = eigen
-EIGENFOLDERLIB = eigenlib
 EIGENTARNAME = $(EIGENFOLDER).tar.gz
 
 # submodules
 SUBMODCHECK = $(GLFWCHECK)
-SUBMODEXIST = $(GLFWFOLDERLIB) $(EIGENFOLDERLIB)
+SUBMODEXIST = $(GLFWFOLDERLIB) $(EIGENFOLDER)
 
 # libraries
 LDFLAGSRAW = $(GLFWFOLDERLIB)/lib
@@ -50,7 +49,7 @@ FLAGS += -g
 # FLAGS += -fprofile-arcs -ftest-coverage
 
 # include variables
-INCLUDERAW = include $(GLFWFOLDER)/include/GLFW
+INCLUDERAW = include $(GLFWFOLDER)/include/GLFW $(EIGENFOLDER)
 INCLUDE = $(addprefix -I, $(INCLUDERAW))
 
 # frameworks
@@ -150,9 +149,3 @@ $(EIGENFOLDER):
 	@tar fxz $@.tar.gz --strip 1 -C $@
 	@rm $@.tar.gz
 	@echo $@ "untar and unzip!"
-
-# eigen compilation
-$(EIGENFOLDERLIB): $(EIGENFOLDER)
-	cd $(EIGENFOLDER) && cmake -DCMAKE_INSTALL_PREFIX=../$(EIGENFOLDERLIB) .
-	make install -C $(EIGENFOLDER)
-	@echo $@ "updated!"
