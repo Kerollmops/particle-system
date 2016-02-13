@@ -1,33 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   OpenCl.cpp                                         :+:      :+:    :+:   */
+/*   OpenCL.cpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: crenault <crenault@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/11 13:05:18 by crenault          #+#    #+#             */
-/*   Updated: 2016/02/11 13:06:16 by crenault         ###   ########.fr       */
+/*   Updated: 2016/02/13 15:58:49 by crenault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "OpenCl.hpp"
+#include "OpenCL.hpp"
 
-OpenCl::OpenCl(void) {
+OpenCL::OpenCL(void) {
 
 	//
 }
 
-OpenCl::OpenCl(OpenCl const &src) {
+OpenCL::OpenCL(OpenCL const &src) {
 
 	*this = src;
 }
 
-OpenCl::~OpenCl(void) {
+OpenCL::~OpenCL(void) {
 
 	//
 }
 
-OpenCl		&OpenCl::operator=(OpenCl const &src) {
+OpenCL		&OpenCL
+	::operator=(OpenCL const &src) {
 
 	static_cast<void>(src);
 	return *this;

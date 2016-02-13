@@ -5,8 +5,8 @@
 #                                                     +:+ +:+         +:+      #
 #    By: crenault <crenault@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2015/05/09 18:00:27 by crenault          #+#    #+#              #
-#    Updated: 2016/02/13 13:42:28 by crenault         ###   ########.fr        #
+#    Created: 2016/02/13 15:36:50 by crenault          #+#    #+#              #
+#    Updated: 2016/02/13 16:05:36 by crenault         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,13 +19,13 @@ GLFWLIBPATH = $(GLFWFOLDER)/$(GLFWLIB)
 GLFWCHECK = $(GLFWFOLDER)/.git
 
 # eigen variables
-# http://bitbucket.org/eigen/eigen/get/3.2.7.tar.gz
 EIGENFOLDER = eigen
-EIGENCHECK = $(EIGENFOLDER)
+EIGENFOLDERLIB = eigenlib
+EIGENTARNAME = $(EIGENFOLDER).tar.gz
 
 # submodules
-SUBMODCHECK = $(GLFWCHECK) $(EIGENCHECK)
-SUBMODEXIST = $(GLFWFOLDERLIB)
+SUBMODCHECK = $(GLFWCHECK)
+SUBMODEXIST = $(GLFWFOLDERLIB) $(EIGENFOLDERLIB)
 
 # libraries
 LDFLAGSRAW = $(GLFWFOLDERLIB)/lib
@@ -143,5 +143,16 @@ $(GLFWFOLDERLIB):
 	@make install -C $(GLFWFOLDER)
 	@echo $@ "updated!"
 
-$(EIGENCHECK):
-	#
+# eigen download
+$(EIGENFOLDER):
+	@mkdir -p $@
+	@curl -L "http://bitbucket.org/eigen/eigen/get/3.2.7.tar.gz" > $@.tar.gz
+	@tar fxz $@.tar.gz --strip 1 -C $@
+	@rm $@.tar.gz
+	@echo $@ "untar and unzip!"
+
+# eigen compilation
+$(EIGENFOLDERLIB): $(EIGENFOLDER)
+	cd $(EIGENFOLDER) && cmake -DCMAKE_INSTALL_PREFIX=../$(EIGENFOLDERLIB) .
+	make install -C $(EIGENFOLDER)
+	@echo $@ "updated!"
