@@ -6,11 +6,13 @@
 /*   By: crenault <crenault@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/11 11:41:05 by crenault          #+#    #+#             */
-/*   Updated: 2016/02/14 15:35:12 by crenault         ###   ########.fr       */
+/*   Updated: 2016/02/14 20:00:18 by crenault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Window.hpp"
+#include "Particles.hpp"
+#include "matrix.hpp"
 
 // test cl.hpp
 #include "cl.hpp"
@@ -27,16 +29,10 @@
 # define CL_GL_SHARING_EXT "cl_khr_gl_sharing"
 #endif
 
-// ///////////
-
-/*// test eigen
-#include <iostream>
-#include "Eigen/Dense"
-// //////////*/
-
 int		main(int argc, char const **argv)
 {
 	Window		window("Particle System", 854, 480, GL_FALSE);
+	Particles	particles(1000);
 
 	(void)argc;
 	(void)argv;
@@ -90,23 +86,42 @@ int		main(int argc, char const **argv)
 		throw std::exception();
 	}
 
-	/*
+	particles.bind_array();
+	particles.bind_buffer();
 	glEnableVertexAttribArray(0);
 	glVertexAttribIPointer(0, 2, GL_UNSIGNED_INT, 0, NULL);
-	*/
 
-	// create opengl buffer here
-	// void glGenBuffers(GLsizei n​, GLuint * buffers​);
-	// void glBindBuffer(GLenum target​, GLuint buffer​);
-	// void glBufferData​(enum target, sizeiptr size, const void *data, enum usage)
-
-	// cl::BufferGL::BufferGL(context, CL_MEM_READ_WRITE, /*GLuint bufobj*/0, &ret);
+	cl::BufferGL::BufferGL(context, CL_MEM_READ_WRITE, particles.get_buffer_id(), &ret);
 
 	if (ret != CL_SUCCESS)
 	{
 		dprintf(2, "Error while trying to create buffer from openGL...\n");
 		throw std::exception();
 	}
+
+	Eigen::MatrixXd		proj_mat = get_pers_proj(60.f,
+		(float)window.get_width() / (float)window.get_height(), 0.1f, 1000.f);
+
+	/*
+	// matrices
+	proj_mat = mat4_pers_proj_rh(60.f, (float)window.width / (float)window.height, 0.1f, 1000.f);
+
+	// trans_mat = mat4_trans(-0.5f * map_size.x, 0.f, -0.5f * map_size.y);
+	trans_mat = mat4_ident();
+	// rot_mat = mat4_rotate(0.0f, vec3(0.f, 1.f, 0.f));
+	rot_mat = mat4_ident();
+	float scale_ratio = 1.f; // 0.08f
+	scale_mat = mat4_scale(scale_ratio, scale_ratio, scale_ratio);
+	model_mat = mat4_mult(rot_mat, mat4_mult(scale_mat, trans_mat));
+	t_vec3 cam_pos = vec3(0, 1, 6);
+	view_mat = mat4_view_lookat(cam_pos, vec3(0, 0, 0), vec3(0, 1, 0));
+	*/
+
+	// glUseProgram(map_program_gl);
+
+	// glUniformMatrix4fv(glGetUniformLocation(map_program_gl, "proj_mat"), 1, GL_FALSE, proj_mat.data());
+	// glUniformMatrix4fv(glGetUniformLocation(map_program_gl, "model_mat"), 1, GL_FALSE, model_mat.m);
+	// glUniformMatrix4fv(glGetUniformLocation(map_program_gl, "view_mat"), 1, GL_FALSE, view_mat.m);
 
 	// ///////////
 
@@ -120,18 +135,18 @@ int		main(int argc, char const **argv)
 	std::cout << m << std::endl;
 	// //////////*/
 
-	while (glfwWindowShouldClose(window.getPtr()) == GL_FALSE)
+	while (glfwWindowShouldClose(window.get_ptr()) == GL_FALSE)
 	{
 		glfwPollEvents();
-		if (GLFW_PRESS == glfwGetKey(window.getPtr(), GLFW_KEY_ESCAPE))
+		if (GLFW_PRESS == glfwGetKey(window.get_ptr(), GLFW_KEY_ESCAPE))
 		{
-			glfwSetWindowShouldClose(window.getPtr(), GL_TRUE);
+			glfwSetWindowShouldClose(window.get_ptr(), GL_TRUE);
 		}
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 		//
 
-		glfwSwapBuffers(window.getPtr());
+		glfwSwapBuffers(window.get_ptr());
 	}
 	return (0);
 }

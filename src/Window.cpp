@@ -6,7 +6,7 @@
 /*   By: crenault <crenault@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/11 13:05:03 by crenault          #+#    #+#             */
-/*   Updated: 2016/02/13 13:26:04 by crenault         ###   ########.fr       */
+/*   Updated: 2016/02/14 19:59:36 by crenault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ Window::Window(const char *title, int width, int height, int resizable)
 	: _title(title), _width(width), _height(height), _resizable(resizable) {
 
 	init_gl_context();
-	glfwWindowHint(GLFW_RESIZABLE, resizable);
+	glfwWindowHint(GLFW_RESIZABLE, this->_resizable);
 	this->_window_ptr = glfwCreateWindow(this->_width, this->_height, this->_title.c_str(), NULL, NULL);
 	glfwGetWindowSize(this->_window_ptr, &this->_width, &this->_height);
 	if (this->_window_ptr == NULL)
@@ -53,10 +53,10 @@ Window::Window(const char *title, int width, int height, int resizable)
 	glViewport(0, 0, this->_frame_width, this->_frame_height);
 }
 
-Window::Window(Window const &src) {
+// Window::Window(Window const &src) {
 
-	*this = src;
-}
+// 	*this = src;
+// }
 
 Window::~Window(void) {
 
@@ -70,7 +70,17 @@ Window::~Window(void) {
 	return *this;
 }*/
 
-GLFWwindow			*Window::getPtr(void)
+GLFWwindow			*Window::get_ptr(void)
 {
 	return (this->_window_ptr);
+}
+
+int					Window::get_width(void) const {
+
+	return (this->_width);
+}
+
+int					Window::get_height(void) const {
+
+	return (this->_height);
 }

@@ -6,7 +6,7 @@
 #    By: crenault <crenault@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/02/13 15:36:50 by crenault          #+#    #+#              #
-#    Updated: 2016/02/14 19:17:07 by crenault         ###   ########.fr        #
+#    Updated: 2016/02/14 20:00:45 by crenault         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -63,9 +63,10 @@ CFLAGS = $(FLAGS) $(INCLUDE)
 SRC = main.cpp
 SRC += Window.cpp
 SRC += Particles.cpp
+SRC += pers_proj.cpp
 
 # paths of source files
-SRCDIR = src
+SRCDIR = src src/matrix
 vpath %.cpp $(SRCDIR)
 
 # objects variables

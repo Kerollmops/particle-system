@@ -6,7 +6,7 @@
 /*   By: crenault <crenault@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/11 13:05:03 by crenault          #+#    #+#             */
-/*   Updated: 2016/02/13 13:19:28 by crenault         ###   ########.fr       */
+/*   Updated: 2016/02/14 19:58:56 by crenault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,14 @@ class Window {
 public:
 	Window(void) = delete;
 	Window(const char *title, int width, int height, int resizable);
-	Window(Window const &src);
+	// Window(Window const &src);
 	virtual ~Window(void);
-	// Window		&operator=(Window const &src);
+	Window		&operator=(Window const &src) = delete;
 
-	GLFWwindow		*getPtr(void);
+	GLFWwindow		*get_ptr(void);
+
+	int				get_width(void) const;
+	int				get_height(void) const;
 
 private:
 	std::string	_title;

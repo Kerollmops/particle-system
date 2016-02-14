@@ -6,7 +6,7 @@
 /*   By: crenault <crenault@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/14 15:22:40 by crenault          #+#    #+#             */
-/*   Updated: 2016/02/14 19:25:05 by crenault         ###   ########.fr       */
+/*   Updated: 2016/02/14 19:41:42 by crenault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,15 +22,17 @@ class Particles {
 
 public:
 	Particles(size_t number = ONE_MILLION);
-	Particles(Particles const &src);
+	// Particles(Particles const &src);
 	virtual ~Particles(void);
-	Particles		&operator=(Particles const &src);
+	Particles		&operator=(Particles const &src) = delete;
 
 	void			allocate_buffer(size_t number);
 	void			deallocate_buffer(void);
 
-	void			bind_array(void);
-	void			bind_buffer(void);
+	void			bind_array(void) const;
+	void			bind_buffer(void) const;
+
+	GLuint			get_buffer_id(void) const;
 
 private:
 	GLuint			_vao;
