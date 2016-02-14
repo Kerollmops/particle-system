@@ -6,7 +6,7 @@
 #    By: crenault <crenault@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/02/13 15:36:50 by crenault          #+#    #+#              #
-#    Updated: 2016/02/13 16:25:36 by crenault         ###   ########.fr        #
+#    Updated: 2016/02/14 19:17:07 by crenault         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -62,6 +62,7 @@ CFLAGS = $(FLAGS) $(INCLUDE)
 # to compile files
 SRC = main.cpp
 SRC += Window.cpp
+SRC += Particles.cpp
 
 # paths of source files
 SRCDIR = src

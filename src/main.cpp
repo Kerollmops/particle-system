@@ -6,7 +6,7 @@
 /*   By: crenault <crenault@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/11 11:41:05 by crenault          #+#    #+#             */
-/*   Updated: 2016/02/13 17:23:22 by crenault         ###   ########.fr       */
+/*   Updated: 2016/02/14 15:35:12 by crenault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,15 +90,17 @@ int		main(int argc, char const **argv)
 		throw std::exception();
 	}
 
-	// create vao's
-	// here
+	/*
+	glEnableVertexAttribArray(0);
+	glVertexAttribIPointer(0, 2, GL_UNSIGNED_INT, 0, NULL);
+	*/
 
 	// create opengl buffer here
 	// void glGenBuffers(GLsizei n​, GLuint * buffers​);
 	// void glBindBuffer(GLenum target​, GLuint buffer​);
 	// void glBufferData​(enum target, sizeiptr size, const void *data, enum usage)
 
-	cl::BufferGL::BufferGL(context, CL_MEM_READ_WRITE, /*GLuint bufobj*/0, &ret);
+	// cl::BufferGL::BufferGL(context, CL_MEM_READ_WRITE, /*GLuint bufobj*/0, &ret);
 
 	if (ret != CL_SUCCESS)
 	{
