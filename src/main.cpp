@@ -6,7 +6,7 @@
 /*   By: crenault <crenault@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/11 11:41:05 by crenault          #+#    #+#             */
-/*   Updated: 2016/02/14 22:14:14 by crenault         ###   ########.fr       */
+/*   Updated: 2016/02/14 22:16:57 by crenault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int		main(int argc, char const **argv)
 	Window		window("Particle System", 854, 480, GL_FALSE);
 	Particles	particles(1000);
 
-	// to clean
+	#pragma message("put this in the particles object")
 	GLuint			prog_particles;
 
 	(void)argc;
@@ -159,6 +159,8 @@ int		main(int argc, char const **argv)
 			glfwSetWindowShouldClose(window.get_ptr(), GL_TRUE);
 		}
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+		#pragma message("update FPS counter here !!!")
 
 		// particles.bind_array();
 		glDrawArrays(GL_POINTS, 0, particles.number_particles());
