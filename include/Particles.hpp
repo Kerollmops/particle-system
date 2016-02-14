@@ -6,7 +6,7 @@
 /*   By: crenault <crenault@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/14 15:22:40 by crenault          #+#    #+#             */
-/*   Updated: 2016/02/14 19:41:42 by crenault         ###   ########.fr       */
+/*   Updated: 2016/02/14 22:08:01 by crenault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@ public:
 	virtual ~Particles(void);
 	Particles		&operator=(Particles const &src) = delete;
 
+	size_t			number_particles(void) const;
+
 	void			allocate_buffer(size_t number);
 	void			deallocate_buffer(void);
 
@@ -35,6 +37,8 @@ public:
 	GLuint			get_buffer_id(void) const;
 
 private:
+	size_t			_number_particles;
+
 	GLuint			_vao;
 	GLuint			_positions_vbo;
 

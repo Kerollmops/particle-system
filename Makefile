@@ -6,7 +6,7 @@
 #    By: crenault <crenault@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/02/13 15:36:50 by crenault          #+#    #+#              #
-#    Updated: 2016/02/14 21:49:02 by crenault         ###   ########.fr        #
+#    Updated: 2016/02/14 22:12:21 by crenault         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -52,8 +52,8 @@ FLAGS += -g
 # FLAGS += -fprofile-arcs -ftest-coverage
 
 # include variables
-INCLUDERAW = include $(GLFWFOLDER)/include/GLFW $(CMHFOLDER)/include
-INCLUDERAW += $(CMHFOLDER)/libft/includes
+INCLUDERAW = include include/load $(GLFWFOLDER)/include/GLFW
+INCLUDERAW += $(CMHFOLDER)/include $(CMHFOLDER)/libft/includes
 INCLUDE = $(addprefix -I, $(INCLUDERAW))
 
 # frameworks
@@ -68,9 +68,12 @@ SRC = main.cpp
 SRC += Window.cpp
 SRC += Particles.cpp
 SRC += pers_proj.cpp
+SRC += get_file_content.cpp
+SRC += load_shaders.cpp
+SRC += load_kernel.cpp
 
 # paths of source files
-SRCDIR = src src/matrix
+SRCDIR = src src/matrix src/load
 vpath %.cpp $(SRCDIR)
 
 # objects variables

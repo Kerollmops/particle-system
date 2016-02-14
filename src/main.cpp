@@ -6,13 +6,15 @@
 /*   By: crenault <crenault@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/11 11:41:05 by crenault          #+#    #+#             */
-/*   Updated: 2016/02/14 21:53:10 by crenault         ###   ########.fr       */
+/*   Updated: 2016/02/14 22:14:14 by crenault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Window.hpp"
 #include "Particles.hpp"
 #include "pers_proj.hpp"
+
+#include "load_shaders.hpp"
 
 // test cl.hpp
 #include "cl.hpp"
@@ -33,6 +35,9 @@ int		main(int argc, char const **argv)
 {
 	Window		window("Particle System", 854, 480, GL_FALSE);
 	Particles	particles(1000);
+
+	// to clean
+	GLuint			prog_particles;
 
 	(void)argc;
 	(void)argv;
@@ -122,25 +127,29 @@ int		main(int argc, char const **argv)
 	model_mat = mat4_mult(rot_mat, mat4_mult(scale_mat, trans_mat));
 	t_vec3 cam_pos = vec3(0, 1, 6);
 	view_mat = mat4_view_lookat(cam_pos, vec3(0, 0, 0), vec3(0, 1, 0));
+
 	//*/
 
-	// glUseProgram(map_program_gl);
+	prog_particles = program_from_shaders("src/shaders/particles.vert",
+				"src/shaders/particles.frag");
+	if (prog_particles == 0)
+	{
+		dprintf(2, "Error while trying to load shaders...\n");
+		throw std::exception();
+	}
 
-	// glUniformMatrix4fv(glGetUniformLocation(map_program_gl, "proj_mat"), 1, GL_FALSE, proj_mat.data());
-	// glUniformMatrix4fv(glGetUniformLocation(map_program_gl, "model_mat"), 1, GL_FALSE, model_mat.m);
-	// glUniformMatrix4fv(glGetUniformLocation(map_program_gl, "view_mat"), 1, GL_FALSE, view_mat.m);
+	// loading matrices
 
-	// ///////////
+	GLint		tmp_location;
 
-	/*// test eigen
-	Eigen::MatrixXd m(2,2);
+	glUseProgram(prog_particles);
 
-	m(0,0) = 3;
-	m(1,0) = 2.5;
-	m(0,1) = -1;
-	m(1,1) = m(1,0) + m(0,1);
-	std::cout << m << std::endl;
-	// //////////*/
+	tmp_location = glGetUniformLocation(prog_particles, "proj_mat");
+	glUniformMatrix4fv(tmp_location, 1, GL_FALSE, proj_mat.m);
+	tmp_location = glGetUniformLocation(prog_particles, "model_mat");
+	glUniformMatrix4fv(tmp_location, 1, GL_FALSE, model_mat.m);
+	tmp_location = glGetUniformLocation(prog_particles, "view_mat");
+	glUniformMatrix4fv(tmp_location, 1, GL_FALSE, view_mat.m);
 
 	while (glfwWindowShouldClose(window.get_ptr()) == GL_FALSE)
 	{
@@ -151,7 +160,8 @@ int		main(int argc, char const **argv)
 		}
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-		//
+		// particles.bind_array();
+		glDrawArrays(GL_POINTS, 0, particles.number_particles());
 
 		glfwSwapBuffers(window.get_ptr());
 	}

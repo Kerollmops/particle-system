@@ -6,13 +6,14 @@
 /*   By: crenault <crenault@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/14 15:22:40 by crenault          #+#    #+#             */
-/*   Updated: 2016/02/14 19:41:50 by crenault         ###   ########.fr       */
+/*   Updated: 2016/02/14 22:10:35 by crenault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Particles.hpp"
 
-Particles::Particles(size_t number) {
+Particles::Particles(size_t number)
+	: _number_particles(number) {
 
 	glGenVertexArrays(1, &this->_vao);
 	this->allocate_buffer(number);
@@ -35,12 +36,21 @@ Particles::~Particles(void) {
 // 	return *this;
 // }
 
+size_t			Particles::number_particles(void) const {
+
+	return (this->_number_particles);
+}
+
 void			Particles::allocate_buffer(size_t number) {
 
+	size_t		buff_size;
+
+	this->_number_particles = number;
+	buff_size = this->_number_particles * sizeof(float) * 3;
 	this->bind_array();
 	glGenBuffers(1, &this->_positions_vbo);
 	this->bind_buffer();
-	glBufferData(GL_ARRAY_BUFFER, number * sizeof(float) * 3, NULL, GL_STATIC_DRAW);
+	glBufferData(GL_ARRAY_BUFFER, buff_size, NULL, GL_STATIC_DRAW);
 }
 
 void			Particles::deallocate_buffer(void) {
