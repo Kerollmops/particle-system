@@ -5,7 +5,8 @@
       "include_dirs": [
         "${project_folder}/include",
         "${project_folder}/glfw/include/GLFW",
-        "${project_folder}/eigen"
+        "${project_folder}/cMatrixHelper/include",
+        "${project_folder}/cMatrixHelper/libft/include"
       ]
     }
   },

@@ -6,13 +6,13 @@
 /*   By: crenault <crenault@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/11 11:41:05 by crenault          #+#    #+#             */
-/*   Updated: 2016/02/14 20:00:18 by crenault         ###   ########.fr       */
+/*   Updated: 2016/02/14 21:53:10 by crenault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Window.hpp"
 #include "Particles.hpp"
-#include "matrix.hpp"
+#include "pers_proj.hpp"
 
 // test cl.hpp
 #include "cl.hpp"
@@ -99,23 +99,30 @@ int		main(int argc, char const **argv)
 		throw std::exception();
 	}
 
-	Eigen::MatrixXd		proj_mat = get_pers_proj(60.f,
-		(float)window.get_width() / (float)window.get_height(), 0.1f, 1000.f);
+	//*
 
-	/*
+	t_mat4		proj_mat;
+	t_mat4		trans_mat;
+	t_mat4		rot_mat;
+	t_mat4		scale_mat;
+	t_mat4		model_mat;
+	t_mat4		view_mat;
+
 	// matrices
-	proj_mat = mat4_pers_proj_rh(60.f, (float)window.width / (float)window.height, 0.1f, 1000.f);
+	float screen_ratio = (float)window.get_width() / (float)window.get_height();
+	proj_mat = mat4_pers_proj_rh(60.f, screen_ratio, 0.1f, 1000.f);
 
 	// trans_mat = mat4_trans(-0.5f * map_size.x, 0.f, -0.5f * map_size.y);
 	trans_mat = mat4_ident();
 	// rot_mat = mat4_rotate(0.0f, vec3(0.f, 1.f, 0.f));
 	rot_mat = mat4_ident();
+
 	float scale_ratio = 1.f; // 0.08f
 	scale_mat = mat4_scale(scale_ratio, scale_ratio, scale_ratio);
 	model_mat = mat4_mult(rot_mat, mat4_mult(scale_mat, trans_mat));
 	t_vec3 cam_pos = vec3(0, 1, 6);
 	view_mat = mat4_view_lookat(cam_pos, vec3(0, 0, 0), vec3(0, 1, 0));
-	*/
+	//*/
 
 	// glUseProgram(map_program_gl);
 

@@ -6,7 +6,7 @@
 #    By: crenault <crenault@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/02/13 15:36:50 by crenault          #+#    #+#              #
-#    Updated: 2016/02/14 20:00:45 by crenault         ###   ########.fr        #
+#    Updated: 2016/02/14 21:49:02 by crenault         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,18 +18,21 @@ GLFWLIB = lib$(GLFWNAME).a
 GLFWLIBPATH = $(GLFWFOLDER)/$(GLFWLIB)
 GLFWCHECK = $(GLFWFOLDER)/.git
 
-# eigen variables
-EIGENFOLDER = eigen
-EIGENTARNAME = $(EIGENFOLDER).tar.gz
+# cMatrixHelper variables
+CMHNAME = cmh
+CMHFOLDER = cMatrixHelper
+CMHLIB = lib$(CMHNAME).a
+CMHLIBPATH = $(CMHFOLDER)/$(CMHLIB)
+CMHCHECK = $(CMHFOLDER)/.git
 
 # submodules
-SUBMODCHECK = $(GLFWCHECK)
-SUBMODEXIST = $(GLFWFOLDERLIB) $(EIGENFOLDER)
+SUBMODCHECK = $(GLFWCHECK) $(CMHCHECK)
+SUBMODEXIST = $(GLFWFOLDERLIB) $(CMHLIBPATH)
 
 # libraries
-LDFLAGSRAW = $(GLFWFOLDERLIB)/lib
+LDFLAGSRAW = $(GLFWFOLDERLIB)/lib $(CMHFOLDER) $(CMHFOLDER)/libft
 LDFLAGS = $(addprefix -L, $(LDFLAGSRAW))
-LDLIBSRAW = $(GLFWNAME)
+LDLIBSRAW = $(GLFWNAME) $(CMHNAME) ft
 LDLIBS = $(addprefix -l, $(LDLIBSRAW))
 
 # compiler
@@ -49,7 +52,8 @@ FLAGS += -g
 # FLAGS += -fprofile-arcs -ftest-coverage
 
 # include variables
-INCLUDERAW = include $(GLFWFOLDER)/include/GLFW $(EIGENFOLDER)
+INCLUDERAW = include $(GLFWFOLDER)/include/GLFW $(CMHFOLDER)/include
+INCLUDERAW += $(CMHFOLDER)/libft/includes
 INCLUDE = $(addprefix -I, $(INCLUDERAW))
 
 # frameworks
@@ -144,10 +148,7 @@ $(GLFWFOLDERLIB):
 	@make install -C $(GLFWFOLDER)
 	@echo $@ "updated!"
 
-# eigen download
-$(EIGENFOLDER):
-	@mkdir -p $@
-	@curl -L "http://bitbucket.org/eigen/eigen/get/3.2.7.tar.gz" > $@.tar.gz
-	@tar fxz $@.tar.gz --strip 1 -C $@
-	@rm $@.tar.gz
-	@echo $@ "untar and unzip!"
+# cMatrixHelper compilation
+$(CMHLIBPATH):
+	@$(MAKE) -C $(CMHFOLDER)
+	@echo $@ "updated!"

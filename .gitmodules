@@ -4,3 +4,6 @@
 [submodule "glfw"]
 	path = glfw
 	url = https://github.com/glfw/glfw.git
+[submodule "cMatrixHelper"]
+	path = cMatrixHelper
+	url = https://github.com/kerosene2000/cMatrixHelper
